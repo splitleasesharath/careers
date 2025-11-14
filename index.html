@@ -1426,52 +1426,82 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 36px;
+                font-size: 32px;
+                line-height: 1.3;
             }
 
             .hero-subtitle {
-                font-size: 18px;
+                font-size: 16px;
+                padding: 0 8px;
+            }
+
+            .hero-badge {
+                font-size: 12px;
+                padding: 6px 16px;
             }
 
             .section-title {
-                font-size: 32px;
+                font-size: 28px;
+                line-height: 1.3;
             }
 
             .section-description {
-                font-size: 16px;
+                font-size: 15px;
+            }
+
+            .section-label {
+                font-size: 12px;
             }
 
             .values-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .value-item {
+                padding: 24px;
             }
 
             .resources-list {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .resource-item {
+                padding: 20px;
             }
 
             .footer-cta-title {
-                font-size: 32px;
+                font-size: 28px;
             }
 
             .step-item {
                 flex-direction: column;
+                padding: 20px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
             }
 
             .hero-section {
-                padding: 60px 24px 40px;
+                padding: 80px 20px 50px;
+                min-height: 400px;
             }
 
             .content-section {
-                padding: 60px 24px;
+                padding: 50px 20px;
             }
 
             .video-container-wrapper {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 32px;
             }
 
             .video-section {
-                padding: 60px 24px;
+                padding: 50px 20px;
             }
 
             .mission-grid {
@@ -1481,6 +1511,35 @@
 
             .mission-examples {
                 gap: 16px;
+            }
+
+            .example-card {
+                padding: 20px;
+                height: 170px;
+            }
+
+            .role-card {
+                padding: 28px;
+            }
+
+            .role-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .apply-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .role-title {
+                font-size: 24px;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 95vh;
             }
 
             /* Footer mobile responsive */
@@ -1517,6 +1576,40 @@
                 text-align: center;
                 padding: 1.5rem 1rem;
                 font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 15px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .cta-primary,
+            .apply-button {
+                padding: 14px 28px;
+                font-size: 15px;
+            }
+
+            .example-card {
+                height: 160px;
+            }
+
+            .timeline-label {
+                font-size: 10px;
+            }
+
+            .role-meta {
+                flex-direction: column;
+                gap: 8px;
             }
         }
     </style>
