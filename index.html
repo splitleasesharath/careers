@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,330 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="//embed.typeform.com/next/embed.js"></script>
+    <style>
+        /* Header Styles from index-header */
+        :root {
+            --header-bg-color: #31135D;
+            --header-bg-hover: #251047;
+            --header-text-color: white;
+            --dropdown-bg: white;
+            --dropdown-text: #1a1a1a;
+            --dropdown-text-gray: #6b7280;
+            --dropdown-hover-bg: rgba(91, 33, 182, 0.05);
+            --button-bg: rgb(255, 255, 255);
+            --button-text: rgb(109, 35, 207);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --header-z-index: 9999;
+        }
+
+        .main-header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0;
+            right: 0;
+            background: var(--header-bg-color);
+            box-shadow: var(--shadow-sm);
+            z-index: var(--header-z-index);
+            transition: all 0.3s ease;
+            transform: none !important;
+            border-bottom: none;
+        }
+
+        .nav-container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--header-text-color);
+            line-height: 1.2;
+            white-space: nowrap;
+            font-family: var(--font-family);
+        }
+
+        @media (max-width: 768px) {
+            .logo-text {
+                display: none;
+            }
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 3rem;
+            flex: 1;
+            justify-content: center;
+            margin: 0 2rem;
+        }
+
+        .mobile-text {
+            display: none;
+        }
+
+        .desktop-text {
+            display: inline;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 1rem;
+            background: var(--dropdown-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            min-width: 280px;
+            padding: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--dropdown-text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: var(--dropdown-hover-bg);
+        }
+
+        .dropdown-title {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dropdown-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .dropdown-desc {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--dropdown-text-gray);
+            line-height: 1.3;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--header-text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-family: var(--font-family);
+        }
+
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--header-text-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            white-space: nowrap;
+        }
+
+        .explore-rentals-btn {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 0.75rem 2.5rem;
+            border: 2px solid var(--button-bg);
+            border-radius: 5px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .explore-rentals-btn:hover {
+            background-color: transparent;
+            color: var(--button-bg);
+        }
+
+        .divider {
+            color: var(--header-text-color);
+            opacity: 0.5;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            gap: 4px;
+        }
+
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: var(--header-text-color);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: relative;
+                padding: 0.75rem 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .hamburger-menu {
+                display: none;
+            }
+
+            .nav-center {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                position: static;
+                background: transparent;
+                margin: 0;
+                flex: 1;
+                justify-content: center;
+            }
+
+            .nav-right {
+                gap: 0.75rem;
+            }
+
+            .mobile-text {
+                display: inline;
+            }
+
+            .desktop-text {
+                display: none;
+            }
+
+            .explore-rentals-btn,
+            .divider {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: auto;
+                right: 0;
+                transform: none;
+                min-width: 250px;
+            }
+
+            .nav-dropdown:first-child .dropdown-menu {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .nav-center {
+                gap: 0.25rem;
+            }
+
+            .nav-right {
+                gap: 0.5rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+        }
     <style>
         * {
             margin: 0;
@@ -285,6 +608,171 @@
             height: 20px;
         }
 
+        /* Mission Grid */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .mission-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .example-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid #E5E7EB;
+            transition: all 0.2s ease;
+            position: relative;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .example-card:hover {
+            border-color: #31135D;
+            box-shadow: 0 8px 24px rgba(49, 19, 93, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .example-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            transition: all 0.6s ease;
+            overflow: hidden;
+        }
+
+        .example-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-purple-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: 600;
+            overflow: hidden;
+            transition: all 0.6s ease;
+        }
+
+        .example-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .example-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            transition: all 0.6s ease;
+        }
+
+        .example-card:hover .example-header {
+            opacity: 0;
+            max-height: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+
+        .example-pattern {
+            font-size: 15px;
+            color: #6B7280;
+            line-height: 1.6;
+            transition: all 0.6s ease;
+            flex: 1;
+        }
+
+        .example-review {
+            font-size: 15px;
+            color: #6B7280;
+            line-height: 1.6;
+            font-style: italic;
+            opacity: 0;
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            transition: all 0.6s ease;
+            pointer-events: none;
+        }
+
+        .example-content-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .example-card:hover .example-pattern {
+            opacity: 0;
+        }
+
+        .example-card:hover .example-review {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .example-timeline {
+            display: flex;
+            gap: 4px;
+            transition: all 0.6s ease;
+        }
+
+        .timeline-labels {
+            transition: all 0.6s ease;
+        }
+
+        .example-card:hover .example-timeline {
+            opacity: 0;
+        }
+
+        .example-card:hover .timeline-labels {
+            opacity: 0;
+        }
+
+        .day-block {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #E5E7EB;
+        }
+
+        .day-block.active {
+            background: var(--gradient-purple-blue);
+        }
+
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .timeline-label {
+            font-size: 11px;
+            color: #9CA3AF;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .mission-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mission-grid.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
         /* Values Grid */
         .values-grid {
             display: grid;
@@ -474,102 +962,465 @@
             transform: translateY(-2px);
         }
 
+        /* Roles Section */
+        .roles-list {
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .role-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid #E5E7EB;
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            border-color: #31135D;
+            box-shadow: 0 12px 32px rgba(49, 19, 93, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .role-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .role-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .role-location,
+        .role-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .role-location svg,
+        .role-type svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .apply-button {
+            padding: 14px 32px;
+            background: var(--gradient-purple-blue);
+            color: white;
+            border-radius: 500px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(49, 19, 93, 0.2);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .apply-button:hover {
+            background: var(--gradient-purple-pink);
+            box-shadow: 0 8px 24px rgba(49, 19, 93, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .apply-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .role-description {
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .role-responsibilities,
+        .role-requirements {
+            margin-bottom: 28px;
+        }
+
+        .role-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .role-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .role-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #4B5563;
+            line-height: 1.6;
+        }
+
+        .role-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #31135D;
+            font-weight: 600;
+        }
+
+        /* Dedicated Video Section */
+        .video-section {
+            background: #f7f8f9;
+            padding: 100px 32px;
+            position: relative;
+        }
+
+        .video-container-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .video-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .video-header {
+            text-align: left;
+        }
+
+        .video-player-container {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(49, 19, 93, 0.15);
+            position: relative;
+        }
+
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16 / 9;
+            transition: transform 0.3s ease;
+            transform: scale(1.15);
+        }
+
+        .video-player.unzoomed {
+            transform: scale(1);
+        }
+
+        .play-button-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(49, 19, 93, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .play-button-overlay:hover {
+            background: rgba(49, 19, 93, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-button-overlay svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+            margin-left: 4px;
+        }
+
+        .video-caption {
+            font-size: 14px;
+            color: #6B7280;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        .video-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .video-links .section-link {
+            display: inline-flex;
+            width: fit-content;
+        }
+
+        /* Footer Styles from footer-index */
+        :root {
+            --max-width: 1200px;
+            --radius-md: 8px;
+        }
+
+        .main-footer {
+            background: #31135D;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 2rem 1.5rem 1rem;
+            width: 100%;
+            margin: 0;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin-bottom: 0;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+        }
+
+        .footer-column h4 {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 0.4rem;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .referral-text,
+        .import-text {
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .referral-options {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .referral-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .referral-options input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .referral-input,
+        .import-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            color: white;
+            margin-bottom: 0.25rem;
+            height: 44px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+
+        .referral-input::placeholder,
+        .import-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .referral-input:focus,
+        .import-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .share-btn,
+        .import-btn {
+            width: 100%;
+            background: #5B21B6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .share-btn:hover,
+        .import-btn:hover {
+            background: #6D28D9;
+            transform: translateY(-2px);
+        }
+
+        .share-btn:active,
+        .import-btn:active {
+            transform: translateY(0);
+        }
+
+        .import-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            margin: 0;
+            background: #f5f5f5;
+            border-top: 1px solid #e0e0e0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .footer-bottom a {
+            color: #666;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: #333;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            opacity: 1;
         }
 
         .modal-content {
             position: relative;
             width: 90%;
-            max-width: 1200px;
-            background: #1a1a1a;
+            max-width: 1000px;
+            height: 90vh;
+            background: white;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            background: #31135D;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .modal-title {
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
         }
 
         .modal-close {
-            background: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: white;
             border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
         }
 
         .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
+            background: #f3f4f6;
+            transform: scale(1.1);
         }
 
         .modal-close svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            color: #111827;
         }
 
-        .modal-body {
-            padding: 0;
-            background: #000;
-        }
-
-        .modal-video {
+        .modal-content [data-tf-live] {
             width: 100%;
-            height: auto;
-            display: block;
-            max-height: 80vh;
+            height: 100%;
         }
 
         /* Responsive Design */
@@ -613,28 +1464,151 @@
             .content-section {
                 padding: 60px 24px;
             }
+
+            .video-container-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .video-section {
+                padding: 60px 24px;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .mission-examples {
+                gap: 16px;
+            }
+
+            /* Footer mobile responsive */
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+
+            .footer-column {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 1.5rem;
+                min-height: auto;
+            }
+
+            .footer-column:last-child {
+                border-bottom: none;
+            }
+
+            .footer-column h4 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-column a {
+                display: block;
+                padding: 0.5rem 0;
+                font-size: 0.95rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding: 1.5rem 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Split Lease Header Component -->
     <header class="main-header">
         <nav class="nav-container">
             <div class="nav-left">
-                <a href="../" class="logo">
+                <a href="https://splitlease.app" class="logo">
+                    <img src="../assets/images/logo.png" alt="Split Lease" class="logo-image">
                     <span class="logo-text">Split Lease</span>
                 </a>
             </div>
+            <button class="hamburger-menu" aria-label="Toggle navigation menu" onclick="toggleMobileMenu()">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <div class="nav-center">
+                <div class="nav-dropdown">
+                    <a href="#host" class="nav-link dropdown-trigger" role="button" aria-expanded="false" aria-haspopup="true">
+                        <span class="mobile-text">Host</span>
+                        <span class="desktop-text">Host with Us</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu" role="menu" aria-label="Host with Us menu">
+                        <a href="https://app.split.lease/host-step-by-step-guide-to-list" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Why List with Us</span>
+                            <span class="dropdown-desc">New to Split Lease? Learn more about hosting</span>
+                        </a>
+                        <a href="https://app.split.lease/success-stories-guest" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Success Stories</span>
+                            <span class="dropdown-desc">Explore other hosts' feedback</span>
+                        </a>
+                        <a href="https://app.split.lease/signup-login" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">List Property</span>
+                        </a>
+                        <a href="https://app.split.lease/policies/cancellation-and-refund-policy" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Legal Information</span>
+                            <span class="dropdown-desc">Review most important policies</span>
+                        </a>
+                        <a href="https://app.split.lease/faq" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">FAQs</span>
+                            <span class="dropdown-desc">Frequently Asked Questions</span>
+                        </a>
+                        <a href="https://app.split.lease/signup-login" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Sign Up</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#stay" class="nav-link dropdown-trigger" role="button" aria-expanded="false" aria-haspopup="true">
+                        <span class="mobile-text">Guest</span>
+                        <span class="desktop-text">Stay with Us</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu" role="menu" aria-label="Stay with Us menu">
+                        <a href="https://app.split.lease/search" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Explore Rentals</span>
+                            <span class="dropdown-desc">See available listings!</span>
+                        </a>
+                        <a href="https://app.split.lease/success-stories-guest" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Success Stories</span>
+                            <span class="dropdown-desc">Explore other guests' feedback</span>
+                        </a>
+                        <a href="https://app.split.lease/faq" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">FAQs</span>
+                            <span class="dropdown-desc">Frequently Asked Questions</span>
+                        </a>
+                        <a href="https://app.split.lease/signup-login" class="dropdown-item" role="menuitem">
+                            <span class="dropdown-title">Sign Up</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="nav-right">
-                <a href="../" class="nav-link">Home</a>
-                <a href="#roles" class="cta-button">View Open Roles</a>
+                <a href="https://app.split.lease/search" class="explore-rentals-btn">Explore Rentals</a>
+                <a href="javascript:void(0)" class="nav-link" onclick="openAuthModal(); return false;">Sign In</a>
+                <span class="divider">|</span>
+                <a href="javascript:void(0)" class="nav-link" onclick="openAuthModal(); return false;">Sign Up</a>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <video autoplay muted loop playsinline class="hero-video-background">
+        <video autoplay muted loop playsinline class="hero-video-background" id="heroVideo">
             <source src="time-lapse.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -648,8 +1622,8 @@
                 <span class="highlight">Start Here</span>
             </h1>
             <p class="hero-subtitle">
-                We're redefining the way people live, work, and share space.<br><br>
-                At Split Lease, we're building tools that make multilocal living effortless — empowering people to live in more than one place, without the friction of traditional renting.
+                We're building a market network for multilocal living.<br><br>
+                At Split Lease, we enable flexible part-time rentals with split schedules — empowering people to live in multiple cities, without paying for days they don't use.
             </p>
             <div class="hero-cta">
                 <a href="#roles" class="cta-primary">
@@ -663,49 +1637,164 @@
     <!-- Mission Section -->
     <section class="content-section alt-bg">
         <div class="section-container">
-            <div class="section-header">
-                <div class="section-label">MISSION</div>
-                <h2 class="section-title">Helping People Live Multilocally</h2>
-                <p class="section-description">
-                    We believe that the way we live should match the way we work — flexible, creative, and borderless.
-                </p>
-                <div class="section-links">
-                    <a href="#" class="section-link">
-                        <i data-feather="play-circle" style="width: 18px; height: 18px;"></i>
-                        <span>Start with our interactive game</span>
-                        <i data-feather="arrow-right"></i>
-                    </a>
-                    <a href="#" class="section-link">
-                        <i data-feather="book-open" style="width: 18px; height: 18px;"></i>
-                        <span>Read the academic article on multilocal living</span>
-                        <i data-feather="arrow-right"></i>
-                    </a>
+            <div class="mission-grid">
+                <div class="mission-examples">
+                    <!-- Sarah Example -->
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="Sarah">
+                            </div>
+                            <div class="example-name">Sarah</div>
+                        </div>
+                        <div class="example-content-wrapper">
+                            <p class="example-pattern">
+                                Lives in Philly, uses Split Lease in NYC Monday-Wednesday
+                            </p>
+                            <p class="example-review">
+                                "Before Split Lease, my life was a nightmare. I was either drowning in NYC rent or spending 4 hours a day commuting."
+                            </p>
+                        </div>
+                        <div class="example-timeline">
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                        </div>
+                        <div class="timeline-labels">
+                            <span class="timeline-label">Mon</span>
+                            <span class="timeline-label">Sun</span>
+                        </div>
+                    </div>
+
+                    <!-- Marcus Example -->
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-avatar">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="Marcus">
+                            </div>
+                            <div class="example-name">Marcus</div>
+                        </div>
+                        <div class="example-content-wrapper">
+                            <p class="example-pattern">
+                                Lives in Boston, uses Split Lease in NYC Thursday-Sunday
+                            </p>
+                            <p class="example-review">
+                                "I was burning out from the weekly grind. Split Lease gave me back my time and sanity. I'm saving $2,000/month."
+                            </p>
+                        </div>
+                        <div class="example-timeline">
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                        </div>
+                        <div class="timeline-labels">
+                            <span class="timeline-label">Mon</span>
+                            <span class="timeline-label">Sun</span>
+                        </div>
+                    </div>
+
+                    <!-- Jenna Example -->
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-avatar">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces" alt="Jenna">
+                            </div>
+                            <div class="example-name">Jenna</div>
+                        </div>
+                        <div class="example-content-wrapper">
+                            <p class="example-pattern">
+                                Lives in DC, uses Split Lease in NYC Monday-Thursday
+                            </p>
+                            <p class="example-review">
+                                "I thought I had to choose between my career and quality of life. Split Lease gave me flexibility on my terms."
+                            </p>
+                        </div>
+                        <div class="example-timeline">
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block active"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                            <div class="day-block"></div>
+                        </div>
+                        <div class="timeline-labels">
+                            <span class="timeline-label">Mon</span>
+                            <span class="timeline-label">Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-content">
+                    <div class="section-label">MISSION</div>
+                    <h2 class="section-title">Helping People Live Multilocally</h2>
+                    <p class="section-description">
+                        We're creating a new category where flexibility meets affordability in housing.
+                    </p>
+                    <p class="section-description">
+                        Split Lease enables alternating arrangements where multiple guests use the same space on different days. You only pay for the nights you need — whether that's 3 days a week or 5. No traditional lease, no wasted rent, just flexible access.
+                    </p>
+                    <div class="section-links">
+                        <a href="#" class="section-link">
+                            <i data-feather="play-circle" style="width: 18px; height: 18px;"></i>
+                            <span>Start with our interactive game</span>
+                            <i data-feather="arrow-right"></i>
+                        </a>
+                        <a href="#" class="section-link">
+                            <i data-feather="book-open" style="width: 18px; height: 18px;"></i>
+                            <span>Read the academic article on multilocal living</span>
+                            <i data-feather="arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Company Section -->
-    <section class="content-section">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-label">COMPANY</div>
-                <h2 class="section-title">How We Got Here</h2>
-                <p class="section-description">
-                    From a few people sharing a workspace and an idea to a growing, globally distributed team, Split Lease is built on experimentation, collaboration, and curiosity.
-                </p>
-                <div class="section-links">
-                    <a href="#" class="section-link" id="timelapseLink">
-                        <i data-feather="video" style="width: 18px; height: 18px;"></i>
-                        <span>Watch our journey – A time-lapse of Split Lease in motion</span>
-                        <i data-feather="arrow-right"></i>
-                    </a>
+    <!-- Company Journey Video Section -->
+    <section class="video-section" style="background: white;">
+        <div class="video-container-wrapper">
+            <div class="video-content">
+                <div class="video-header">
+                    <div class="section-label">COMPANY</div>
+                    <h2 class="section-title">How We Got Here</h2>
+                    <p class="section-description">
+                        We started by testing one atomic network — an anchor listing, a hot deal, and active hosts. Today we're scaling that model to create a new category: multilocal living.
+                    </p>
+                </div>
+
+                <div class="video-links">
                     <a href="#" class="section-link">
                         <i data-feather="edit-3" style="width: 18px; height: 18px;"></i>
-                        <span>What it's like to work here – Read Michelle's take</span>
+                        <span>What it's like to work here — Read Michelle's take</span>
                         <i data-feather="arrow-right"></i>
                     </a>
                 </div>
+            </div>
+
+            <div>
+                <div class="video-player-container" id="videoPlayerContainer">
+                    <video class="video-player" id="careerVideo" preload="metadata">
+                        <source src="time-lapse.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="play-button-overlay" id="playButtonOverlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="video-caption">
+                    A time-lapse of Split Lease in motion
+                </p>
             </div>
         </div>
     </section>
@@ -722,36 +1811,36 @@
                     <div class="value-icon">
                         <i data-feather="zap"></i>
                     </div>
-                    <h3 class="value-title">Experiment constantly</h3>
-                    <p class="value-description">We test, learn, and iterate fast.</p>
+                    <h3 class="value-title">Speed and iteration</h3>
+                    <p class="value-description">We ship fast, test quickly, and improve daily.</p>
                 </div>
                 <div class="value-item">
                     <div class="value-icon">
                         <i data-feather="globe"></i>
                     </div>
-                    <h3 class="value-title">Work from anywhere</h3>
-                    <p class="value-description">Remote isn't an afterthought; it's our default.</p>
+                    <h3 class="value-title">Build what's needed</h3>
+                    <p class="value-description">No skyscrapers in small towns — we stay balanced.</p>
                 </div>
                 <div class="value-item">
                     <div class="value-icon">
                         <i data-feather="users"></i>
                     </div>
-                    <h3 class="value-title">Collaborate deeply</h3>
-                    <p class="value-description">We build tools that connect people — starting with ourselves.</p>
+                    <h3 class="value-title">Machine leverage</h3>
+                    <p class="value-description">We automate busy work to focus on what matters most.</p>
                 </div>
                 <div class="value-item">
                     <div class="value-icon">
                         <i data-feather="book"></i>
                     </div>
-                    <h3 class="value-title">Learn endlessly</h3>
-                    <p class="value-description">Curiosity drives our growth.</p>
+                    <h3 class="value-title">Always upgrading</h3>
+                    <p class="value-description">We delete the old to make space for the new ideas.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why We'll Win Section -->
-    <section class="content-section">
+    <section class="content-section" style="background: white;">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">WHY WE'LL WIN</div>
@@ -799,13 +1888,13 @@
                 </div>
             </div>
             <p class="section-description" style="margin-top: 40px;">
-                Everyone who completes a usability test automatically gets access to our guest waiting room — a space filled with ideas, resources, and ways to stay connected.
+                Everyone who completes a usability test gets access to our knowledge base — a library filled with product ideas, team resources, and ways to stay connected with us.
             </p>
         </div>
     </section>
 
     <!-- What's Inside Section -->
-    <section class="content-section">
+    <section class="content-section" style="background: white;">
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">WHAT'S INSIDE</div>
@@ -855,94 +1944,346 @@
         </div>
     </section>
 
-    <!-- Video Modal -->
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Split Lease Journey – Time-Lapse</h3>
-                <button class="modal-close" id="closeModal">
-                    <i data-feather="x"></i>
-                </button>
+    <!-- Open Roles Section -->
+    <section id="roles" class="content-section alt-bg">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">OPEN ROLES</div>
+                <h2 class="section-title">Join Our Team</h2>
+                <p class="section-description">
+                    We're looking for talented individuals to help us build the future of flexible living.
+                </p>
             </div>
-            <div class="modal-body">
-                <video id="modalVideo" class="modal-video" controls preload="metadata">
-                    <source src="time-lapse.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </div>
 
-    <!-- Footer CTA -->
-    <section id="roles" class="footer-cta-section">
-        <div class="footer-cta-container">
-            <h2 class="footer-cta-title">Ready to Join Us?</h2>
-            <p class="footer-cta-description">
-                Want to be part of the future of flexible living?<br>
-                Explore our open roles and start your journey with Split Lease.
-            </p>
-            <a href="#" class="cta-white">
-                See open roles
-                <i data-feather="arrow-right"></i>
-            </a>
+            <div class="roles-list">
+                <div class="role-card">
+                    <div class="role-header">
+                        <div>
+                            <h3 class="role-title">Executive Assistant</h3>
+                            <div class="role-meta">
+                                <span class="role-location">
+                                    <i data-feather="map-pin"></i>
+                                    Remote
+                                </span>
+                                <span class="role-type">
+                                    <i data-feather="clock"></i>
+                                    Full-time
+                                </span>
+                            </div>
+                        </div>
+                        <button class="apply-button" id="applyButton">
+                            Apply Now
+                            <i data-feather="arrow-right"></i>
+                        </button>
+                    </div>
+                    <p class="role-description">
+                        We're seeking a highly organized and proactive Executive Assistant to support our leadership team. You'll be the operational backbone, managing schedules, coordinating projects, and ensuring smooth day-to-day operations across our remote team.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <!-- For Hosts Column -->
+            <div class="footer-column">
+                <h4>For Hosts</h4>
+                <a href="https://app.split.lease/signup-login">List Property Now</a>
+                <a href="https://app.split.lease/host-step-by-step-guide-to-list">How to List</a>
+                <a href="https://app.split.lease/policies/cancellation-and-refund-policy">Legal Section</a>
+                <a href="https://app.split.lease/host-guarantee">Guarantees</a>
+                <a href="https://app.split.lease/demo-house-manual">Free House Manual</a>
+            </div>
+
+            <!-- For Guests Column -->
+            <div class="footer-column">
+                <h4>For Guests</h4>
+                <a href="https://app.split.lease/search">Explore Split Leases</a>
+                <a href="https://app.split.lease/success-stories-guest">Success Stories</a>
+                <a href="https://app.split.lease/signup-login">Speak to an Agent</a>
+                <a href="https://app.split.lease/faq">View FAQ</a>
+            </div>
+
+            <!-- Company Column -->
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="https://app.split.lease/faq?question=Guest&answer=1692211080963x751695924087252700">About Periodic Tenancy</a>
+                <a href="https://app.split.lease/about-us">About the Team</a>
+                <a href="https://app.split.lease/careers">Careers at Split Lease</a>
+                <a href="https://app.split.lease/knowledge-base/1676496004548x830972865850585500">View Blog</a>
+            </div>
+
+            <!-- Referral Column -->
+            <div class="footer-column">
+                <h4>Refer a friend</h4>
+                <p class="referral-text">You get $50 and they get $50 *after their first booking</p>
+                <div class="referral-options">
+                    <label>
+                        <input type="radio" name="referral" value="text" checked>
+                        Text
+                    </label>
+                    <label>
+                        <input type="radio" name="referral" value="email">
+                        Email
+                    </label>
+                </div>
+                <input type="text" placeholder="Your friend's phone number" class="referral-input" id="referralInput">
+                <button class="share-btn" onclick="handleReferral()">Share now</button>
+            </div>
+
+            <!-- Import Column -->
+            <div class="footer-column">
+                <h4>Import your listing from another site</h4>
+                <p class="import-text">No need to start from scratch</p>
+                <input type="text" placeholder="https://your-listing-link" class="import-input" id="importUrl">
+                <input type="email" placeholder="janedoe@your_email.com" class="import-input" id="importEmail">
+                <button class="import-btn" onclick="handleImport()">Submit</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <a href="https://app.split.lease/terms">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" style="margin-right: 0.5rem;">
+                <path d="M2 2h8v8H2z" stroke="currentColor" stroke-width="1" fill="none"/>
+                <path d="M4 6h4M4 8h3"/>
+            </svg>
+            Terms of Use
+        </a>
+        <span>Made with love in New York City</span>
+        <span>© 2025 SplitLease</span>
+    </div>
+
+    <!-- Modal for Typeform -->
+    <div id="typeformModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">
+                <i data-feather="x"></i>
+            </button>
+            <div data-tf-live="01JTV62WNGXMDX830477HVX7NZ"></div>
+        </div>
+    </div>
 
     <script>
         // Initialize Feather icons
         feather.replace();
 
+        // Header JavaScript Functions
+        function toggleMobileMenu() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navCenter = document.querySelector('.nav-center');
+            const navRight = document.querySelector('.nav-right');
+
+            if (hamburger) hamburger.classList.toggle('active');
+            if (navCenter) navCenter.classList.toggle('mobile-active');
+            if (navRight) navRight.classList.toggle('mobile-active');
+        }
+
+        function setupDropdownMenus() {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const trigger = dropdown.querySelector('.dropdown-trigger');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                let isOpen = false;
+
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    isOpen = !isOpen;
+
+                    if (isOpen) {
+                        dropdown.classList.add('active');
+                        menu.style.opacity = '1';
+                        menu.style.visibility = 'visible';
+                    } else {
+                        dropdown.classList.remove('active');
+                        menu.style.opacity = '0';
+                        menu.style.visibility = 'hidden';
+                    }
+                });
+
+                dropdown.addEventListener('mouseenter', function() {
+                    dropdown.classList.add('hover');
+                });
+
+                dropdown.addEventListener('mouseleave', function() {
+                    dropdown.classList.remove('hover');
+                    if (!isOpen) {
+                        dropdown.classList.remove('active');
+                        menu.style.opacity = '0';
+                        menu.style.visibility = 'hidden';
+                    }
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        if (menu) {
+                            menu.style.opacity = '0';
+                            menu.style.visibility = 'hidden';
+                        }
+                    });
+                }
+            });
+        }
+
+        function openAuthModal() {
+            window.location.href = 'https://app.split.lease/signup-login';
+        }
+
+        // Footer JavaScript Functions
+        document.querySelectorAll('input[name="referral"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const input = document.getElementById('referralInput');
+                if (this.value === 'text') {
+                    input.placeholder = "Your friend's phone number";
+                } else {
+                    input.placeholder = "Your friend's email";
+                }
+            });
+        });
+
+        function handleReferral() {
+            const method = document.querySelector('input[name="referral"]:checked').value;
+            const contact = document.getElementById('referralInput').value;
+
+            if (!contact.trim()) {
+                alert('Please enter contact information');
+                return;
+            }
+
+            console.log(`Referral via ${method}:`, contact);
+            alert(`Referral submitted via ${method}: ${contact}`);
+            document.getElementById('referralInput').value = '';
+        }
+
+        function handleImport() {
+            const url = document.getElementById('importUrl').value;
+            const email = document.getElementById('importEmail').value;
+
+            if (!url.trim() || !email.trim()) {
+                alert('Please fill in both fields');
+                return;
+            }
+
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                alert('Please enter a valid URL');
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Please enter a valid email');
+                return;
+            }
+
+            const btn = event.target;
+            btn.textContent = 'Importing...';
+            btn.disabled = true;
+
+            console.log('Import listing:', { url, email });
+
+            setTimeout(() => {
+                btn.textContent = 'Submit';
+                btn.disabled = false;
+                alert('Listing imported successfully!');
+                document.getElementById('importUrl').value = '';
+                document.getElementById('importEmail').value = '';
+            }, 2000);
+        }
+
+        // Initialize header dropdowns
+        setupDropdownMenus();
+
+        // Modal functionality
+        const applyButton = document.getElementById('applyButton');
+        const typeformModal = document.getElementById('typeformModal');
+        const closeModal = document.getElementById('closeModal');
+
+        // Open modal
+        if (applyButton) {
+            applyButton.addEventListener('click', function() {
+                typeformModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                // Re-initialize feather icons for the close button
+                feather.replace();
+            });
+        }
+
+        // Close modal
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                typeformModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        // Close modal when clicking outside
+        typeformModal.addEventListener('click', function(e) {
+            if (e.target === typeformModal) {
+                typeformModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && typeformModal.classList.contains('active')) {
+                typeformModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
         // Set hero video to start at 13 seconds
-        const heroVideo = document.querySelector('.hero-video-background');
+        const heroVideo = document.getElementById('heroVideo');
         if (heroVideo) {
             heroVideo.addEventListener('loadedmetadata', function() {
                 heroVideo.currentTime = 13;
             });
         }
 
-        // Modal functionality
-        const modal = document.getElementById('videoModal');
-        const timelapseLink = document.getElementById('timelapseLink');
-        const closeModal = document.getElementById('closeModal');
-        const modalVideo = document.getElementById('modalVideo');
+        // Custom video play button
+        const careerVideo = document.getElementById('careerVideo');
+        const playButtonOverlay = document.getElementById('playButtonOverlay');
+        const videoPlayerContainer = document.getElementById('videoPlayerContainer');
 
-        // Open modal
-        timelapseLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-            // Re-render feather icons in modal
-            feather.replace();
-            // Wait a moment for modal to be visible, then play
-            setTimeout(() => {
-                modalVideo.play().catch(err => {
-                    console.log('Video autoplay prevented:', err);
-                });
-            }, 100);
+        // Play video when overlay button is clicked
+        playButtonOverlay.addEventListener('click', function() {
+            careerVideo.play();
+            playButtonOverlay.classList.add('hidden');
+            careerVideo.setAttribute('controls', 'controls');
         });
 
-        // Close modal
-        closeModal.addEventListener('click', function() {
-            modal.classList.remove('active');
-            modalVideo.pause();
-            modalVideo.currentTime = 0;
+        // Start with zoom on (for thumbnail)
+        careerVideo.addEventListener('play', function() {
+            playButtonOverlay.classList.add('hidden');
         });
 
-        // Close modal when clicking outside
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                modalVideo.pause();
-                modalVideo.currentTime = 0;
+        // Monitor video time and remove zoom after 2 seconds
+        careerVideo.addEventListener('timeupdate', function() {
+            if (careerVideo.currentTime >= 2) {
+                careerVideo.classList.add('unzoomed');
+            } else {
+                careerVideo.classList.remove('unzoomed');
             }
         });
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                modalVideo.pause();
-                modalVideo.currentTime = 0;
+        // Show play button when video is paused
+        careerVideo.addEventListener('pause', function() {
+            if (!careerVideo.ended) {
+                playButtonOverlay.classList.remove('hidden');
             }
+        });
+
+        // Show play button when video ends
+        careerVideo.addEventListener('ended', function() {
+            playButtonOverlay.classList.remove('hidden');
+            careerVideo.classList.remove('unzoomed');
         });
     </script>
 </body>
