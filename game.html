@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multilocal Living Game - See the difference Split Lease makes!">
+    <title>The Commute Comparison | Split Lease</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background: #f7f8f9;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        :root {
+            --brand-purple: #31135D;
+            --gradient-purple-blue: linear-gradient(135deg, #31135D 0%, #4A2F7C 50%, #5B21B6 100%);
+        }
+
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .game-header {
+            background: var(--brand-purple);
+            padding: 32px 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(49, 19, 93, 0.15);
+        }
+
+        .game-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .game-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Story panel */
+        .story-panel {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 24px 32px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            z-index: 200;
+            text-align: center;
+            border: 3px solid var(--brand-purple);
+        }
+
+        .story-text {
+            font-size: 18px;
+            color: #374151;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .story-highlight {
+            color: var(--brand-purple);
+            font-weight: 700;
+        }
+
+        /* Character thought bubbles */
+        .thought-bubble {
+            position: absolute;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            color: #374151;
+            max-width: 200px;
+            z-index: 150;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 2px solid #E5E7EB;
+        }
+
+        .thought-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        .thought-bubble.show {
+            opacity: 1;
+        }
+
+        /* Map area */
+        .map-container {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(180deg, #E8F4F8 0%, #D4E9F0 100%);
+            overflow: hidden;
+        }
+
+        .city-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Simple road grid */
+        .road-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 99px, rgba(49, 19, 93, 0.1) 99px, rgba(49, 19, 93, 0.1) 100px),
+                repeating-linear-gradient(90deg, transparent, transparent 99px, rgba(49, 19, 93, 0.1) 99px, rgba(49, 19, 93, 0.1) 100px);
+        }
+
+        /* Route paths */
+        .route-line {
+            position: absolute;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            border: 2px solid rgba(49, 19, 93, 0.2);
+        }
+
+        .route-1 {
+            top: 25%;
+            left: 5%;
+            width: 70%;
+        }
+
+        .route-2 {
+            top: 45%;
+            left: 55%;
+            width: 15%;
+        }
+
+        .route-3 {
+            top: 65%;
+            left: 30%;
+            width: 40%;
+        }
+
+        /* Characters */
+        .character {
+            position: absolute;
+            font-size: 40px;
+            transition: all 0.2s linear;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+            z-index: 100;
+        }
+
+        /* Stats panel */
+        .stats-panel {
+            background: white;
+            padding: 32px;
+            border-top: 4px solid var(--brand-purple);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: #F9FAFB;
+            border-radius: 16px;
+            padding: 24px;
+            border: 2px solid #E5E7EB;
+            text-align: center;
+        }
+
+        .stat-emoji {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .stat-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: #6B7280;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-weight: 700;
+        }
+
+        .stat-bad { color: #DC2626; }
+        .stat-good { color: #059669; }
+        .stat-great { color: #31135D; }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 16px 48px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 500px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-start {
+            background: var(--gradient-purple-blue);
+            color: white;
+        }
+
+        .btn-start:hover {
+            box-shadow: 0 4px 12px rgba(49, 19, 93, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-start:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-reset {
+            background: #6B7280;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #4B5563;
+        }
+
+        /* Winner modal */
+        .winner-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 60px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 500px;
+        }
+
+        .winner-modal.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .winner-emoji {
+            font-size: 80px;
+            margin-bottom: 24px;
+        }
+
+        .winner-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--brand-purple);
+            margin-bottom: 16px;
+        }
+
+        .winner-text {
+            font-size: 18px;
+            color: #6B7280;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .winner-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--gradient-purple-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 500px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(49, 19, 93, 0.2);
+        }
+
+        .winner-cta:hover {
+            box-shadow: 0 8px 20px rgba(49, 19, 93, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Location markers */
+        .location-marker {
+            position: absolute;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--brand-purple);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .btn {
+                padding: 12px 32px;
+                font-size: 14px;
+            }
+
+            .winner-modal {
+                padding: 40px;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="game-header">
+            <h1 class="game-title">A Tale of Three Commuters</h1>
+            <p class="game-subtitle">Monday morning, 7:00 AM. Three people wake up with the same destination: their office in NYC. But they've made very different choices about where to live...</p>
+        </div>
+
+        <!-- Map -->
+        <div class="map-container">
+            <div class="city-map">
+                <div class="road-grid"></div>
+
+                <!-- Story panel -->
+                <div class="story-panel" id="storyPanel">
+                    <div class="story-text" id="storyText">
+                        Click "Start Their Journey" to see what happens...
+                    </div>
+                </div>
+
+                <!-- Route paths -->
+                <div class="route-line route-1"></div>
+                <div class="route-line route-2"></div>
+                <div class="route-line route-3"></div>
+
+                <!-- Location markers -->
+                <div class="location-marker" style="bottom: 73%; left: 3%;">📍 Philly</div>
+                <div class="location-marker" style="top: 43%; right: 25%;">🏙️ NYC Office</div>
+
+                <!-- Characters -->
+                <div class="character" id="char1" style="left: 5%; top: 23%;">🚗</div>
+                <div class="character" id="char2" style="left: 55%; top: 43%;">🚶‍♀️</div>
+                <div class="character" id="char3" style="left: 30%; top: 63%;">🚇</div>
+
+                <!-- Thought bubbles -->
+                <div class="thought-bubble" id="bubble1" style="left: 8%; top: 15%;">😰 Traffic is terrible...</div>
+                <div class="thought-bubble" id="bubble2" style="left: 58%; top: 35%;">☕ Perfect! Time for a coffee walk</div>
+                <div class="thought-bubble" id="bubble3" style="left: 33%; top: 55%;">🚇 Subway's packed again...</div>
+            </div>
+        </div>
+
+        <!-- Stats panel -->
+        <div class="stats-panel">
+            <div class="stats-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-emoji">🚗</div>
+                        <div class="stat-name">Road Warrior Rick</div>
+                        <div class="stat-row">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value stat-bad" id="time-rick">0 min</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Cost</span>
+                            <span class="stat-value stat-bad" id="cost-rick">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-emoji">🚶‍♀️</div>
+                        <div class="stat-name">Smart Sarah</div>
+                        <div class="stat-row">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value stat-great" id="time-sarah">0 min</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Cost</span>
+                            <span class="stat-value stat-great" id="cost-sarah">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-emoji">🚇</div>
+                        <div class="stat-name">Full-Time Frank</div>
+                        <div class="stat-row">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value stat-good" id="time-frank">0 min</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Cost</span>
+                            <span class="stat-value stat-bad" id="cost-frank">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-start" id="startBtn">Start Their Journey</button>
+                    <button class="btn btn-reset" id="resetBtn">Reset Story</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner modal -->
+        <div class="winner-modal" id="winnerModal">
+            <div class="winner-emoji">🎉</div>
+            <div class="winner-title">Sarah Wins!</div>
+            <div class="winner-text">
+                With Split Lease, Sarah gets the best of both worlds: short commute, low cost, and the flexibility to live where she wants.
+            </div>
+            <a href="index.html" class="winner-cta">Learn About Split Lease</a>
+        </div>
+    </div>
+
+    <script>
+        const char1 = document.getElementById('char1');
+        const char2 = document.getElementById('char2');
+        const char3 = document.getElementById('char3');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const winnerModal = document.getElementById('winnerModal');
+        const storyText = document.getElementById('storyText');
+        const bubble1 = document.getElementById('bubble1');
+        const bubble2 = document.getElementById('bubble2');
+        const bubble3 = document.getElementById('bubble3');
+
+        let animationId;
+        let progress = { rick: 0, sarah: 0, frank: 0 };
+        let time = { rick: 0, sarah: 0, frank: 0 };
+        let cost = { rick: 0, sarah: 0, frank: 0 };
+        let storyProgress = 0;
+
+        const routes = {
+            rick: { start: 5, end: 75, speed: 0.08, maxTime: 240, maxCost: 65 },
+            sarah: { start: 55, end: 70, speed: 2, maxTime: 15, maxCost: 5 },
+            frank: { start: 30, end: 70, speed: 0.4, maxTime: 45, maxCost: 10 }
+        };
+
+        const storyBeats = [
+            { at: 0, text: "The journey begins! <span class='story-highlight'>Rick</span> starts his 2-hour drive from Philly...", bubbles: [1] },
+            { at: 10, text: "<span class='story-highlight'>Sarah</span> steps out of her Split Lease apartment, just 3 blocks away!", bubbles: [2] },
+            { at: 20, text: "<span class='story-highlight'>Frank</span> battles rush hour on the subway from Brooklyn...", bubbles: [3] },
+            { at: 40, text: "Sarah arrives first! ☕ She even had time to grab a coffee.", bubbles: [2] },
+            { at: 60, text: "Frank arrives next. Not bad, but that monthly rent though... 💸", bubbles: [3] },
+            { at: 90, text: "Rick is still driving... and driving... and driving... 😰", bubbles: [1] }
+        ];
+
+        function updateStory() {
+            const maxProgress = Math.max(progress.rick, progress.sarah, progress.frank);
+
+            storyBeats.forEach(beat => {
+                if (maxProgress >= beat.at && storyProgress < beat.at) {
+                    storyText.innerHTML = beat.text;
+
+                    // Hide all bubbles first
+                    bubble1.classList.remove('show');
+                    bubble2.classList.remove('show');
+                    bubble3.classList.remove('show');
+
+                    // Show relevant bubbles
+                    beat.bubbles.forEach(b => {
+                        if (b === 1) bubble1.classList.add('show');
+                        if (b === 2) bubble2.classList.add('show');
+                        if (b === 3) bubble3.classList.add('show');
+                    });
+
+                    storyProgress = beat.at;
+                }
+            });
+        }
+
+        function animate() {
+            // Update positions
+            if (progress.rick < 100) {
+                progress.rick += routes.rick.speed;
+                const rickPos = routes.rick.start + ((routes.rick.end - routes.rick.start) * progress.rick / 100);
+                char1.style.left = rickPos + '%';
+                time.rick = Math.min((progress.rick / 100) * routes.rick.maxTime, routes.rick.maxTime);
+                cost.rick = Math.min((progress.rick / 100) * routes.rick.maxCost, routes.rick.maxCost);
+            }
+
+            if (progress.sarah < 100) {
+                progress.sarah += routes.sarah.speed;
+                const sarahPos = routes.sarah.start + ((routes.sarah.end - routes.sarah.start) * progress.sarah / 100);
+                char2.style.left = sarahPos + '%';
+                time.sarah = Math.min((progress.sarah / 100) * routes.sarah.maxTime, routes.sarah.maxTime);
+                cost.sarah = Math.min((progress.sarah / 100) * routes.sarah.maxCost, routes.sarah.maxCost);
+            }
+
+            if (progress.frank < 100) {
+                progress.frank += routes.frank.speed;
+                const frankPos = routes.frank.start + ((routes.frank.end - routes.frank.start) * progress.frank / 100);
+                char3.style.left = frankPos + '%';
+                time.frank = Math.min((progress.frank / 100) * routes.frank.maxTime, routes.frank.maxTime);
+                cost.frank = Math.min((progress.frank / 100) * routes.frank.maxCost, routes.frank.maxCost);
+            }
+
+            // Update stats
+            document.getElementById('time-rick').textContent = Math.floor(time.rick) + ' min';
+            document.getElementById('cost-rick').textContent = '$' + cost.rick.toFixed(2);
+            document.getElementById('time-sarah').textContent = Math.floor(time.sarah) + ' min';
+            document.getElementById('cost-sarah').textContent = '$' + cost.sarah.toFixed(2);
+            document.getElementById('time-frank').textContent = Math.floor(time.frank) + ' min';
+            document.getElementById('cost-frank').textContent = '$' + cost.frank.toFixed(2);
+
+            // Update story
+            updateStory();
+
+            // Check winner
+            if (progress.sarah >= 100) {
+                cancelAnimationFrame(animationId);
+                setTimeout(() => {
+                    winnerModal.classList.add('show');
+                }, 500);
+                return;
+            }
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (!animationId) {
+                storyText.innerHTML = "The journey begins! <span class='story-highlight'>Rick</span> starts his 2-hour drive from Philly...";
+                bubble1.classList.add('show');
+                animate();
+                startBtn.disabled = true;
+                startBtn.textContent = 'Story in Progress...';
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+            progress = { rick: 0, sarah: 0, frank: 0 };
+            time = { rick: 0, sarah: 0, frank: 0 };
+            cost = { rick: 0, sarah: 0, frank: 0 };
+            storyProgress = 0;
+
+            char1.style.left = '5%';
+            char2.style.left = '55%';
+            char3.style.left = '30%';
+
+            document.getElementById('time-rick').textContent = '0 min';
+            document.getElementById('cost-rick').textContent = '$0';
+            document.getElementById('time-sarah').textContent = '0 min';
+            document.getElementById('cost-sarah').textContent = '$0';
+            document.getElementById('time-frank').textContent = '0 min';
+            document.getElementById('cost-frank').textContent = '$0';
+
+            storyText.innerHTML = "Click \"Start Their Journey\" to see what happens...";
+            bubble1.classList.remove('show');
+            bubble2.classList.remove('show');
+            bubble3.classList.remove('show');
+
+            winnerModal.classList.remove('show');
+            startBtn.disabled = false;
+            startBtn.textContent = 'Start Their Journey';
+        });
+    </script>
+</body>
+</html>

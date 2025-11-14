@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join Split Lease: We're redefining the way people live, work, and share space. Building tools for multilocal living.">
+    <title>Careers at Split Lease | Join Our Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            color: #1a1a1a;
+            background: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Premium Gradient Variables */
+        :root {
+            --gradient-purple-blue: linear-gradient(135deg, #31135D 0%, #4A2F7C 50%, #5B21B6 100%);
+            --gradient-purple-pink: linear-gradient(135deg, #31135D 0%, #6B21A8 50%, #A855F7 100%);
+            --brand-purple: #31135D;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background: #31135D;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(49, 19, 93, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .cta-button {
+            padding: 12px 28px;
+            background: white;
+            color: #31135D;
+            border-radius: 500px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #F9FAFB;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: white;
+            padding: 100px 48px 80px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+            text-align: center;
+        }
+
+        .hero-video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(49, 19, 93, 0.08);
+            border: 1px solid rgba(49, 19, 93, 0.2);
+            border-radius: 500px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #31135D;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-title .highlight {
+            color: #31135D;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #6B7280;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+        }
+
+        .cta-primary {
+            padding: 16px 40px;
+            background: var(--gradient-purple-blue);
+            color: white;
+            border-radius: 500px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-primary:hover {
+            background: var(--gradient-purple-pink);
+            box-shadow: 0 8px 24px rgba(49, 19, 93, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 32px;
+            position: relative;
+        }
+
+        .content-section.alt-bg {
+            background: #f7f8f9;
+        }
+
+        .section-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #31135D;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: #6B7280;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .section-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .section-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #31135D;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .section-link:hover {
+            gap: 12px;
+        }
+
+        .section-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .value-item {
+            padding: 32px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease;
+        }
+
+        .alt-bg .value-item {
+            background: white;
+        }
+
+        .value-item:hover {
+            border-color: #31135D;
+            box-shadow: 0 8px 24px rgba(49, 19, 93, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .value-icon {
+            margin-bottom: 16px;
+            color: #31135D;
+        }
+
+        .value-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke-width: 2;
+        }
+
+        .value-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .value-description {
+            font-size: 15px;
+            color: #6B7280;
+            line-height: 1.6;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            margin-top: 48px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .alt-bg .step-item {
+            background: white;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-purple-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 15px;
+            color: #6B7280;
+            line-height: 1.6;
+        }
+
+        /* Resources List */
+        .resources-list {
+            margin-top: 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: start;
+            gap: 16px;
+            padding: 24px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .alt-bg .resource-item {
+            background: white;
+        }
+
+        .resource-icon {
+            flex-shrink: 0;
+            color: #31135D;
+        }
+
+        .resource-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke-width: 2;
+        }
+
+        .resource-text {
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        /* Footer CTA Section */
+        .footer-cta-section {
+            background: #31135D;
+            padding: 80px 32px;
+            text-align: center;
+        }
+
+        .footer-cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-cta-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .footer-cta-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-white {
+            padding: 16px 40px;
+            background: white;
+            color: #31135D;
+            border-radius: 500px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-white:hover {
+            background: #F9FAFB;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: #31135D;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .modal-body {
+            padding: 0;
+            background: #000;
+        }
+
+        .modal-video {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 80vh;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-description {
+                font-size: 16px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resources-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-cta-title {
+                font-size: 32px;
+            }
+
+            .step-item {
+                flex-direction: column;
+            }
+
+            .hero-section {
+                padding: 60px 24px 40px;
+            }
+
+            .content-section {
+                padding: 60px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="nav-left">
+                <a href="../" class="logo">
+                    <span class="logo-text">Split Lease</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="../" class="nav-link">Home</a>
+                <a href="#roles" class="cta-button">View Open Roles</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video autoplay muted loop playsinline class="hero-video-background">
+            <source src="time-lapse.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-feather="zap"></i>
+                <span>WE'RE HIRING</span>
+            </div>
+            <h1 class="hero-title">
+                Split Lease Careers<br>
+                <span class="highlight">Start Here</span>
+            </h1>
+            <p class="hero-subtitle">
+                We're redefining the way people live, work, and share space.<br><br>
+                At Split Lease, we're building tools that make multilocal living effortless — empowering people to live in more than one place, without the friction of traditional renting.
+            </p>
+            <div class="hero-cta">
+                <a href="#roles" class="cta-primary">
+                    Join our team
+                    <i data-feather="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="content-section alt-bg">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">MISSION</div>
+                <h2 class="section-title">Helping People Live Multilocally</h2>
+                <p class="section-description">
+                    We believe that the way we live should match the way we work — flexible, creative, and borderless.
+                </p>
+                <div class="section-links">
+                    <a href="#" class="section-link">
+                        <i data-feather="play-circle" style="width: 18px; height: 18px;"></i>
+                        <span>Start with our interactive game</span>
+                        <i data-feather="arrow-right"></i>
+                    </a>
+                    <a href="#" class="section-link">
+                        <i data-feather="book-open" style="width: 18px; height: 18px;"></i>
+                        <span>Read the academic article on multilocal living</span>
+                        <i data-feather="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">COMPANY</div>
+                <h2 class="section-title">How We Got Here</h2>
+                <p class="section-description">
+                    From a few people sharing a workspace and an idea to a growing, globally distributed team, Split Lease is built on experimentation, collaboration, and curiosity.
+                </p>
+                <div class="section-links">
+                    <a href="#" class="section-link" id="timelapseLink">
+                        <i data-feather="video" style="width: 18px; height: 18px;"></i>
+                        <span>Watch our journey – A time-lapse of Split Lease in motion</span>
+                        <i data-feather="arrow-right"></i>
+                    </a>
+                    <a href="#" class="section-link">
+                        <i data-feather="edit-3" style="width: 18px; height: 18px;"></i>
+                        <span>What it's like to work here – Read Michelle's take</span>
+                        <i data-feather="arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="content-section alt-bg">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">OUR VALUES</div>
+                <h2 class="section-title">What Drives Us</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i data-feather="zap"></i>
+                    </div>
+                    <h3 class="value-title">Experiment constantly</h3>
+                    <p class="value-description">We test, learn, and iterate fast.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i data-feather="globe"></i>
+                    </div>
+                    <h3 class="value-title">Work from anywhere</h3>
+                    <p class="value-description">Remote isn't an afterthought; it's our default.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i data-feather="users"></i>
+                    </div>
+                    <h3 class="value-title">Collaborate deeply</h3>
+                    <p class="value-description">We build tools that connect people — starting with ourselves.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i data-feather="book"></i>
+                    </div>
+                    <h3 class="value-title">Learn endlessly</h3>
+                    <p class="value-description">Curiosity drives our growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why We'll Win Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">WHY WE'LL WIN</div>
+                <h2 class="section-title">Built for the Future</h2>
+                <p class="section-description">
+                    The world is changing fast — and so are the ways people live.<br><br>
+                    We're combining pretotyping, AI, and insights from consumer behavior research to design products that meet real human needs.<br><br>
+                    When flexibility becomes the new normal, we'll be ready.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How We Work Section -->
+    <section class="content-section alt-bg">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">HOW WE WORK</div>
+                <h2 class="section-title">Your Journey With Us</h2>
+                <p class="section-description">
+                    Your journey with Split Lease is hands-on, transparent, and built for learning.
+                </p>
+            </div>
+            <div class="process-steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Apply</h3>
+                        <p class="step-description">Submit your application and answer a few quick questions.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Show us your thinking</h3>
+                        <p class="step-description">Record a short usability test video.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Join the trial</h3>
+                        <p class="step-description">Work with us for 3 weeks, collaborate on real projects, and see what life at Split Lease feels like.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="section-description" style="margin-top: 40px;">
+                Everyone who completes a usability test automatically gets access to our guest waiting room — a space filled with ideas, resources, and ways to stay connected.
+            </p>
+        </div>
+    </section>
+
+    <!-- What's Inside Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">WHAT'S INSIDE</div>
+                <h2 class="section-title">We're Not Just Building a Company</h2>
+                <p class="section-description">
+                    We're building a learning engine.
+                </p>
+            </div>
+            <div class="resources-list">
+                <div class="resource-item">
+                    <div class="resource-icon">
+                        <i data-feather="book-open"></i>
+                    </div>
+                    <div class="resource-text">Library of 100+ books</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">
+                        <i data-feather="cpu"></i>
+                    </div>
+                    <div class="resource-text">Typeform learning modules</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">
+                        <i data-feather="video"></i>
+                    </div>
+                    <div class="resource-text">10,000 hours of Loom recordings</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">
+                        <i data-feather="message-circle"></i>
+                    </div>
+                    <div class="resource-text">7 years of Slack knowledge</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">
+                        <i data-feather="settings"></i>
+                    </div>
+                    <div class="resource-text">Access to multiple machines, AI tools, and prototypes</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon">
+                        <i data-feather="target"></i>
+                    </div>
+                    <div class="resource-text">Quiz to test your creative problem-solving skills</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Split Lease Journey – Time-Lapse</h3>
+                <button class="modal-close" id="closeModal">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video id="modalVideo" class="modal-video" controls preload="metadata">
+                    <source src="time-lapse.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer CTA -->
+    <section id="roles" class="footer-cta-section">
+        <div class="footer-cta-container">
+            <h2 class="footer-cta-title">Ready to Join Us?</h2>
+            <p class="footer-cta-description">
+                Want to be part of the future of flexible living?<br>
+                Explore our open roles and start your journey with Split Lease.
+            </p>
+            <a href="#" class="cta-white">
+                See open roles
+                <i data-feather="arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+
+        // Set hero video to start at 13 seconds
+        const heroVideo = document.querySelector('.hero-video-background');
+        if (heroVideo) {
+            heroVideo.addEventListener('loadedmetadata', function() {
+                heroVideo.currentTime = 13;
+            });
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('videoModal');
+        const timelapseLink = document.getElementById('timelapseLink');
+        const closeModal = document.getElementById('closeModal');
+        const modalVideo = document.getElementById('modalVideo');
+
+        // Open modal
+        timelapseLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+            // Re-render feather icons in modal
+            feather.replace();
+            // Wait a moment for modal to be visible, then play
+            setTimeout(() => {
+                modalVideo.play().catch(err => {
+                    console.log('Video autoplay prevented:', err);
+                });
+            }, 100);
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+            }
+        });
+    </script>
+</body>
+</html>
